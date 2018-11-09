@@ -1,0 +1,48 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+
+    <p>Hello world! This is HTML5 Boilerplate.</p>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/animatics.js"></script>
+    <!-- <x-counter value="5">
+        <h1 slot="headerLine">Hello World</h1>
+    </x-counter>
+    <script>
+        $(document).ready(function () {
+            var counter = document.querySelector('x-counter');
+            counter.addEventListener('valueChange', v => console.log(v));
+        });
+    </script> -->
+    <x-animatics value="5">
+        <img src="img/eberhard-grossgasteiger-1101775-unsplash.jpg" alt="" height="5472" width="3648">
+        <img src="img/toa-heftiba-1101752-unsplash.jpg" alt="" height="3936" width="2624">
+    </x-animatics>
+    <script>
+        $(document).ready(function () {
+            var animatics = document.querySelector('x-animatics');
+            animatics.options = { duration: 600 };
+            animatics.addEventListener('valueChange', v => console.log(v));
+        });
+    </script>
+</body>
+
+</html>
