@@ -5,7 +5,7 @@ template.innerHTML = `
         position: relative;
         width: 600px;
         height: 360px;
-        background-color: black;
+        background-color: #292929;
         border: 22px solid #191919;
         overflow: hidden;
     }
@@ -64,11 +64,29 @@ export class Animatics extends HTMLElement {
         this._options = Object.assign(this._options, options);
         console.log(this._options);
     }
+    static get observedAttributes() { return ['duration', 'fadespeed', 'scale', 'ease3d']; }
+
+    attributeChangedCallback(attrName, oldValue, newValue) {
+        switch (attrName) {
+            case 'duration':
+                this._options.duration = parseInt(newValue, 10);
+                break;
+            case 'fadespeed':
+                this._options.fadeSpeed = parseInt(newValue, 10);
+                break;
+            case 'scale':
+                this._options.scale = parseFloat(newValue);
+                break;
+            case 'ease3d':
+                this._options.ease3d = newValue;
+                break;
+        }
+    }
 
     constructor() {
         super();
 
-        this._imagesObj = {};
+        this._imagesObj = [];
         this._currentSlide = 0;
 
         // https://websemantics.uk/articles/transform3d-support-detection/
@@ -118,10 +136,6 @@ export class Animatics extends HTMLElement {
     }
 
     init() {
-        var positionInfo = this.getBoundingClientRect();
-        this.width = positionInfo.width;
-        this.height = positionInfo.height;
-
         this._options.images.forEach(function (element, index, array) {
             this._imagesObj["image" + index] = {};
             this._imagesObj["image" + index].loaded = false;
@@ -175,8 +189,15 @@ export class Animatics extends HTMLElement {
             this.startTransition(0);
             var loaders = this.root.querySelectorAll('.loader'), i;
             this._loader.style.display = "none";
-        } else {
-            // this.startTransition(index);
+        }
+
+        if (index == this._holdup) {
+            this._loader.style.display = "none";
+            this.startTransition(this._holdup);
+        }
+
+        if (this.checkLoadProgress() == true) {
+            if (typeof this._options.onLoadingComplete === "function") { this._options.onLoadingComplete() };
         }
     }
 

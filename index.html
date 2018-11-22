@@ -32,14 +32,13 @@
             counter.addEventListener('valueChange', v => console.log(v));
         });
     </script> -->
-    <x-animatics value="5">
+    <x-animatics>
         <img src="img/eberhard-grossgasteiger-1101775-unsplash.jpg" alt="" height="5472" width="3648">
         <img src="img/toa-heftiba-1101752-unsplash.jpg" alt="" height="3936" width="2624">
     </x-animatics>
     <script>
         $(document).ready(function () {
             var animatics = document.querySelector('x-animatics');
-            animatics.options = { duration: 600 };
             animatics.addEventListener('valueChange', v => console.log(v));
         });
     </script>
