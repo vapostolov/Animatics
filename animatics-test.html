@@ -6,10 +6,44 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <script src="node_modules/@webcomponents/shadydom/shadydom.min.js"></script>
     <script src="node_modules/@webcomponents/custom-elements/custom-elements.min.js"></script>
-    <script src="node_modules/web-component-tester/browser.js"></script>
     <script type="module" src="js/animatics.js"></script>
 </head>
 
-<body></body>
+<body>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
+    <test-fixture id="x-animatics-fixture">
+        <x-animatics>
+            <img src="img/eberhard-grossgasteiger-1101775-unsplash.jpg" alt="" height="5472" width="3648">
+            <img src="img/toa-heftiba-1101752-unsplash.jpg" alt="" height="3936" width="2624">
+        </x-animatics>
+    </test-fixture>
+    <script>
+        WCT = {
+            environmentScripts: [
+                'web-component-tester/bower_components/stacky/browser.js',
+                'web-component-tester/bower_components/async/lib/async.js',
+                'web-component-tester/bower_components/lodash/lodash.js',
+                'web-component-tester/bower_components/mocha/mocha.js',
+                'web-component-tester/bower_components/chai/chai.js',
+                'web-component-tester/bower_components/sinonjs/sinon.js',
+                'web-component-tester/bower_components/sinon-chai/lib/sinon-chai.js',
+                'web-component-tester/bower_components/accessibility-developer-tools/dist/js/axs_testing.js',
+            ],
+        };
+    </script>
+    <script src="node_modules/web-component-tester/browser.js"></script>
+    <script>
+        $(document).ready(function () {
+            suite('<x-animatics>', function () {
+                var component = document.querySelector('x-animatics');
+                component.options = { duration: 60000 }
+                test('renders div', () => {
+                    assert.isOk(component.shadowRoot.querySelector('#animatics_slideshow'));
+                });
+            });
+        });
+    </script>
+</body>
 
 </html>
